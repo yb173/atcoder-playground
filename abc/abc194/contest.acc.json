@@ -1,0 +1,75 @@
+{
+  "contest": {
+    "id": "abc194",
+    "title": "AtCoder Beginner Contest 194",
+    "url": "https://atcoder.jp/contests/abc194"
+  },
+  "tasks": [
+    {
+      "id": "abc194_a",
+      "label": "A",
+      "title": "I Scream",
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc194_a",
+        "submit": "abc194_a.py"
+      }
+    },
+    {
+      "id": "abc194_b",
+      "label": "B",
+      "title": "Job Assignment",
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc194_b",
+        "submit": "abc194_b.py"
+      }
+    },
+    {
+      "id": "abc194_c",
+      "label": "C",
+      "title": "Squared Error",
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc194_c",
+        "submit": "abc194_c.py"
+      }
+    },
+    {
+      "id": "abc194_d",
+      "label": "D",
+      "title": "Journey",
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc194_d",
+        "submit": "abc194_d.py"
+      }
+    },
+    {
+      "id": "abc194_e",
+      "label": "E",
+      "title": "Mex Min",
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_abc194_e",
+        "submit": "abc194_e.py"
+      }
+    },
+    {
+      "id": "abc194_f",
+      "label": "F",
+      "title": "Digits Paradise in Hexadecimal",
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_abc194_f",
+        "submit": "abc194_f.py"
+      }
+    }
+  ]
+}
