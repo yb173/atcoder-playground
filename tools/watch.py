@@ -170,7 +170,7 @@ class MyHandler(PatternMatchingEventHandler):
         # print("■■■ 変更されたファイル名: " + file_name)
 
         # テストディレクトリがあるディレクトリ
-        test_dir = matched.group(1) # 例）/Users/aardvark/work/atcoder/atcoder-playground/abc/abc202/a/
+        test_dir = matched.group(1) # 例）/Users/[USERNAME]/atcoder-playground/abc/abc202/a/
         # print("■■■ テストケースディレクトリ: " + test_dir)
         
         # テスト入力ケース名一覧を取得
@@ -204,13 +204,12 @@ class MyHandler(PatternMatchingEventHandler):
 
             if out_exists:
                 # 期待値が存在する場合
-                # print(Decorate.BOLD + Color.GREEN + "[ AC ]" + Decorate.END)
                 print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値あり） ----------")
                 self.judge_with_out(abs_src_path, in_list[i], out_list[i])
                 print("")
             else:
                 # 期待値が存在しない場合
-                print("---------- " + test_case_name + " 実行結果（期待値なし） ----------")
+                print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値なし） ----------")
                 self.judge_without_out(abs_src_path, in_list[i])
                 print("")
     
