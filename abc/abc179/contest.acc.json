@@ -1,0 +1,75 @@
+{
+  "contest": {
+    "id": "abc179",
+    "title": "AtCoder Beginner Contest 179",
+    "url": "https://atcoder.jp/contests/abc179"
+  },
+  "tasks": [
+    {
+      "id": "abc179_a",
+      "label": "A",
+      "title": "Plural Form",
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc179_a",
+        "submit": "abc179_a.py"
+      }
+    },
+    {
+      "id": "abc179_b",
+      "label": "B",
+      "title": "Go to Jail",
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc179_b",
+        "submit": "abc179_b.py"
+      }
+    },
+    {
+      "id": "abc179_c",
+      "label": "C",
+      "title": "A x B + C",
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc179_c",
+        "submit": "abc179_c.py"
+      }
+    },
+    {
+      "id": "abc179_d",
+      "label": "D",
+      "title": "Leaping Tak",
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc179_d",
+        "submit": "abc179_d.py"
+      }
+    },
+    {
+      "id": "abc179_e",
+      "label": "E",
+      "title": "Sequence Sum",
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_abc179_e",
+        "submit": "abc179_e.py"
+      }
+    },
+    {
+      "id": "abc179_f",
+      "label": "F",
+      "title": "Simplified Reversi",
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_abc179_f",
+        "submit": "abc179_f.py"
+      }
+    }
+  ]
+}
