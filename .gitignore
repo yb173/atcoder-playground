@@ -1,5 +1,14 @@
+# VSCode
+launch.json
+settings.json
+c_cpp_properties.json
+
 # Working Directory
 abc000/
+
+# C++
+main.out
+*.dSYM
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
