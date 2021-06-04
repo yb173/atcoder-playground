@@ -1,11 +1,4 @@
 #include <bits/stdc++.h>
-// #include<iostream>
-// #include<algorithm>
-// #include<math.h>
-// #include<vector>
-// #include<map>
-// #include<set>
-// #include<iomanip>
 
 using namespace std;
 using ll = long long;
@@ -22,20 +15,25 @@ const double PI = acos(-1.0);
 #define rrep(i, a, n) for (int i = a; i <= (n); ++i)
 
 int main() {
-    int N, K; cin >> N >> K;
+    int N; cin >> N ;
+    ll K; cin >> K;
 
-    vector< pair<ll, int> > ab;
+    vector<pair<ll, int>> ab(N);
     rep(i, N) {
-        ll a;
-        int b;
-        cin >> a >>  b;
-        pair<ll, int> p(a, b);
-        ab.push_back(p);
+        cin >> ab[i].first >> ab[i].second;
+    }
+    sort(ab.begin(), ab.end());
+
+    ll pos = K;
+    rep(i, N) {
+        if (ab[i].first > pos) break;
+        pos += ab[i].second;
     }
 
-    rep(i, N) {
-        cout << ab[i].first << ab[i].second << endl;
-    }
+    cout << pos << endl;
 
     return 0;
 }
+
+// 参考
+// https://atcoder.jp/contests/abc203/submissions/23037667
