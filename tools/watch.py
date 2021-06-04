@@ -1,15 +1,13 @@
 #!/.venv/bin/python
 # -*- coding: utf-8 -*-
-"""Pythonファイル監視＆テスト実行スクリプト
+"""Python, C++ファイル監視＆テスト実行スクリプト
 
-* *.py ファイルが変更されたら検出します
-* 変更されたファイルに対応するテストケース一覧を取得します
-* 変更されたファイルに対応するテストケースの期待値一覧を取得します
-* 変更された .py ファイルを実行します
-* 実行結果を出力します
+・ .py ファイルまたは .cpp ファイルの変更を検出します．
+・ 変更されたファイルに対応するテストケースと期待値一覧を取得します
+・ テストを実行します．
+・ 実行結果を出力します
 
 Todo:
-    * README を記述する
 """
 
 import glob
@@ -25,13 +23,16 @@ from watchdog.events import FileModifiedEvent, DirModifiedEvent
 from watchdog.observers import Observer
 
 ### 監視＆実行されるファイルのパターン
-PATTERNS = ['abc*.py']
+PATTERNS = ['abc*.py', 'abc*.cpp']
 
 ### テストケースのインプットファイルのパターン
 TEST_INPUT_PERTTERN = 'tests_*/*.in'
 
 ### テストケースのアウトプットファイルのパターン
 TEST_OUTPUT_PERTTERN = 'tests_*/*.out'
+
+### C++ 実行ファイル名
+CPP_EXEC_FILENAME = 'main.out'
 
 class Color:
     """文字色クラス
@@ -74,83 +75,175 @@ class MyHandler(PatternMatchingEventHandler):
         super(MyHandler, self).__init__(patterns=PATTERNS)
         self.last_runned = datetime.now()
 
-    def get_test_filename_list(self, test_dir: str):
-        """テストケースファイル名一覧取得
+    def get_test_list(self, abs_problem_dir_path: str):
+        """テスト情報一覧取得
         
-        テストケースのファイル名の一覧を取得します．
+        テスト情報の一覧を取得します．
 
         Args:
-            test_dir (str): テストケースがあるディレクトリ
+            abs_problem_dir_path (str): 問題ディレクトリ
         Returns:
-            str: テストケースのファイル名一覧を取得する
+            :obj:`list`: [テストケースファイル名の絶対パス, テストケース名, 期待値ありフラグ, 期待値] の配列
+        Example:
+            test_list[i][0]: '/Users/[USERNAME]/work/atcoder/atcoder-playground/abc/abc203/c/tests_abc203_c/sample-1.in'
+            test_list[i][1]: 'sample-1.in'
+            test_list[i][2]: True
+            test_list[i][3]: '4'
         """
 
-        # ファイル名一覧を取得
-        in_list = glob.glob(test_dir + TEST_INPUT_PERTTERN)
+        # テストケースのファイル名一覧を取得
+        in_list = glob.glob(abs_problem_dir_path + TEST_INPUT_PERTTERN)
         in_list.sort()
-
-        return in_list
-    
-    def get_out_list(self, test_dir: str):
-        """テストケースの出力一覧取得
         
-        テストケースの出力一覧を取得します．
-
-        Args:
-            test_dir (str): テストケースがあるディレクトリ
-
-        Returns
-            out_list(str): テスト出力名のリスト
-        """
-
-        # テストケース一覧を取得 
-        out_name_list = glob.glob(test_dir + TEST_OUTPUT_PERTTERN)
+        # 期待値のファイル名一覧を取得
+        out_name_list = glob.glob(abs_problem_dir_path + TEST_OUTPUT_PERTTERN)
         out_name_list.sort()
+
+        # 期待値を抽出
         out_list = []
         for out in out_name_list:
             f = open(out)
             out_list.append(f.read().strip())
             f.close()
-        return out_list
-    
-    def judge_with_out(self, abs_src_path: str, in_filename: str, out: str):
-        """出力ケースありの場合のテスト実行＆ジャッジ
+
+        # テスト情報のリストを作成
+        test_list = []
+        for i in range(len(in_list)):
+            # テストケース名をテストケース名絶対パスから抽出
+            matched = re.match(r'.+/([^/]+\.in)', in_list[i])
+            test_case_name = matched.group(1)# 例) sample-1.in
+
+            # 期待値が存在するか
+            out_exists = True if out_list[i:i + 1] else False
+
+            # 期待値
+            out = out_list[i] if out_exists else ""
             
-        テストを実行し，結果を出力ケースを比較して結果(AC or WA)を標準出力に出力します
+            # テスト情報を作成: [テストケースファイル名の絶対パス, テストケース名, 期待値ありフラグ, 期待値]
+            test = [in_list[i], test_case_name, out_exists, out]
+            
+            test_list.append(test)
+        
+        return test_list
+        
+    def judge_python(self, abs_src_path: str, in_filename: str, test_case_name: str, out_exists: bool, out: str):
+        """Pythonファイルのテスト実行＆ジャッジ
+            
+        テストを実行し，結果を期待値と比較して結果(AC or WA)を標準出力に出力します．
+        期待値がなければ結果を出力します．
 
         Args:
             abs_src_path (str): 変更があったファイルの絶対パス
-            in_filename(str): テストケースのファイル名
-            out(str): テストケースのアウトプットの内容
+            in_filename (str): テストケースのファイル名の絶対パス
+            test_case_name (str): テストケース名
+            out_exists (bool): 期待値存在フラグ
+            out (str): 期待値
         """
+        if out_exists:
+            print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値あり） ----------")
+        else:
+            print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値なし） ----------")
+
         try:
-            # NOTE: subprocess で呼び出される python は親プロセスが実行されている python になる
             result_byte = subprocess.check_output(['python ' + abs_src_path + ' < ' + in_filename], shell=True)
             result = result_byte.decode().strip()
+            
+            # 期待値がない場合
+            if not out_exists:
+                print(result)
+                print("")
+                return
+
             if result == out:
                 print(Decorate.BOLD + Color.GREEN + "[ AC ]" + Decorate.END)
             else:
                 print(Decorate.BOLD + Color.RED + "[ WA ]" + Decorate.END)
+
             print("Expected: " + out)
             print("Actual  : " + result)
+            print("")
+
         except subprocess.CalledProcessError as e:
             print(e.output)
+            
+    def judge_cpp(self, abs_problem_dir_path: str, in_filename: str, test_case_name: str, out_exists: bool, out: str):
+        """C++ ファイルのテスト実行＆ジャッジ
+            
+        テストを実行し，結果を期待値と比較して結果(AC or WA)を標準出力に出力します．
+        期待値がなければ結果を出力します．
 
-    def judge_without_out(self, abs_src_path: str, in_filename: str):
-        """出力ケースなしの場合のテスト実行＆ジャッジ
-        
-        テストを実行し，結果を標準出力に出力します．出力ケースがないため，AC or WA の判断はおこないません．
+        Args:
+            abs_problem_dir_path (str): 問題ディレクトリ
+            in_filename (str): テストケースのファイル名の絶対パス
+            test_case_name (str): テストケース名
+            out_exists (bool): 期待値存在フラグ
+            out (str): 期待値
+        """
+        if out_exists:
+            print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値あり） ----------")
+        else:
+            print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値なし） ----------")
+
+        try:
+            result_byte = subprocess.check_output([abs_problem_dir_path + '/' + CPP_EXEC_FILENAME + ' < ' + in_filename], shell=True)
+            result = result_byte.decode().strip()
+            
+            # 期待値がない場合
+            if not out_exists:
+                print(result)
+                print("")
+                return
+            
+            if result == out:
+                print(Decorate.BOLD + Color.GREEN + "[ AC ]" + Decorate.END)
+            else:
+                print(Decorate.BOLD + Color.RED + "[ WA ]" + Decorate.END)
+
+            print("Expected: " + out)
+            print("Actual  : " + result)
+            print("")
+
+        except subprocess.CalledProcessError as e:
+            print(e.output)
+                             
+    def run_test_python(self, abs_src_path: str, test_list):
+        """Pythonテスト実行
+
+        指定されたPythonファイルのテストを実行します．
 
         Args:
             abs_src_path (str): 変更があったファイルの絶対パス
-            in_filename(str): テストケースのファイル名
+            test_list (ojb): テスト情報のリスト
         """
-        try:
-            # NOTE: subprocess で呼び出される python は親プロセスが実行されている python になる
-            subprocess.call(['python ' + abs_src_path + ' < ' + in_filename], shell=True)
-        except subprocess.CalledProcessError as e:
-            print(e.output)
+        # ジャッジを実行
+        for i in range(len(test_list)):
+            self.judge_python(abs_src_path, test_list[i][0], test_list[i][1], test_list[i][2], test_list[i][3])
 
+    def run_test_cpp(self, abs_src_path: str, abs_problem_dir_path: str, test_list):
+        """C++テスト実行
+
+        指定された C++ ファイルのテストを実行します．
+
+        Args:
+            abs_src_path (str): 変更があったファイルの絶対パス
+            abs_problem_dir_path (str): 問題ディレクトリ
+            test_list (ojb): テスト情報のリスト
+        """
+        # コンパイル
+        try:
+            print("■■■コンパイル開始")
+            subprocess.check_output(['g++ -std=c++14 ' + abs_src_path + ' -o ' + abs_problem_dir_path + '/' + CPP_EXEC_FILENAME], shell=True)
+            print("■■■コンパイル成功！")
+        except subprocess.CalledProcessError as e:
+            print("■■■コンパイル失敗... _(:3 」∠)_ _(┐「ε:)_")
+            print(e.output)
+            # 中断
+            return
+
+        # ジャッジを実行
+        for i in range(len(test_list)):
+            self.judge_cpp(abs_problem_dir_path, test_list[i][0], test_list[i][1], test_list[i][2], test_list[i][3])
+                
     def run_test(self, abs_src_path: str):
         """テスト実行
 
@@ -159,34 +252,31 @@ class MyHandler(PatternMatchingEventHandler):
         Args:
             abs_src_path (str): 変更があったファイルの絶対パス
         """
-
         print("■■■ 変更されたファイル: " + abs_src_path)
 
         # 変更されたファイル名などを絶対パスから抽出
-        matched = re.match(r'(.+/[^/]+/[^/]+/)(([^/]+)\.py)', abs_src_path)
+        matched = re.match(r'(.+/[^/]+/[^/]+/)(([^/]+)\.(py|cpp))', abs_src_path)
 
         # 変更されたファイル名
-        file_name = matched.group(2) # 例) a.py
+        file_name = matched.group(2) # 例) 「a.py」 or 「a.cpp」
         # print("■■■ 変更されたファイル名: " + file_name)
 
-        # テストディレクトリがあるディレクトリ
-        test_dir = matched.group(1) # 例）/Users/[USERNAME]/atcoder-playground/abc/abc202/a/
-        # print("■■■ テストケースディレクトリ: " + test_dir)
-        
-        # テスト入力ケース名一覧を取得
-        in_list = self.get_test_filename_list(test_dir)
-        print("■■■ テストケース名一覧：")
-        for item in in_list:
-            print(item)
-        
-        # テスト期待値一覧を取得
-        out_list = self.get_out_list(test_dir)
-        print("■■■ テストケースの期待値一覧：")
-        for item in out_list:
-            print(item)
+        # 変更されたファイルの拡張子
+        extension = matched.group(4) # 例) py or cpp
+        # print("■■■ 変更されたファイルの拡張子: " + extension)
 
+        # 問題ディレクトリ(a, b, c, d, e, f)
+        abs_problem_dir_path = matched.group(1) # 例）/Users/[USERNAME]/atcoder-playground/abc/abc202/a/
+        print("■■■ テストケースディレクトリ: " + abs_problem_dir_path)
+                
+        # テスト情報一覧を取得
+        test_list = self.get_test_list(abs_problem_dir_path)
+        print("■■■ テスト情報一覧：")
+        for item in test_list:
+            print(item)
+        
         # テストケースが 0 件なら処理終了
-        if len(in_list) == 0:
+        if len(test_list) == 0:
             print("■■■ テストケースが存在しないためテストを中断します．")
             return
 
@@ -194,24 +284,14 @@ class MyHandler(PatternMatchingEventHandler):
         print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 実行ファイル: " + file_name)
         print("")
 
-        for i in range(len(in_list)):
-            # 期待値（outファイル）存在フラグ
-            out_exists = out_list[i:i + 1]
-            
-            # テストケース名をテストケース名絶対パスから抽出
-            matched = re.match(r'.+/([^/]+\.in)', in_list[i])
-            test_case_name = matched.group(1)# 例) sample-1.in
-
-            if out_exists:
-                # 期待値が存在する場合
-                print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値あり） ----------")
-                self.judge_with_out(abs_src_path, in_list[i], out_list[i])
-                print("")
-            else:
-                # 期待値が存在しない場合
-                print("---------- " + Decorate.BOLD + test_case_name + Decorate.END + " 実行結果（期待値なし） ----------")
-                self.judge_without_out(abs_src_path, in_list[i])
-                print("")
+        if extension == 'py':
+            # Python のテストを実行
+            self.run_test_python(abs_src_path, test_list)
+        elif extension == 'cpp':
+            # C++ のテストを実行
+            self.run_test_cpp(abs_src_path, abs_problem_dir_path, test_list)
+        else:
+            print("サポートされていない拡張子です．拡張子:", extension)
     
     def on_modified(self, event: Union[FileModifiedEvent, DirModifiedEvent]):
         """ファイル変更イベントハンドラ
@@ -239,11 +319,11 @@ def watch():
     ファイル変更イベントを監視し，ハンドリングします．
     """
     
-    print("■■ ファイル監視を開始します．") 
+    print("■■■ ファイル監視を開始します．") 
 
     # 現在のディレクトリの絶対パスを取得
     current_directory = os.getcwd()
-    print("■■ watch.py 実行ディレクトリ: " + current_directory) 
+    print("■■■ watch.py 実行ディレクトリ: " + current_directory) 
 
     # インスタンス生成
     event_handler = MyHandler()
@@ -263,12 +343,12 @@ def watch():
         observer.stop()
         # スレッドが終了するまで待機
         observer.join()
-        print("■■ ファイル監視を終了します．")
+        print("■■■ ファイル監視を終了します．")
     finally:
         observer.stop()
         observer.join()
 
 if __name__ == "__main__":
-    print("■ メイン関数を実行します．")
+    print("■■■ メイン関数を実行します．")
     watch()
-    print("■ メイン関数を終了します．")
+    print("■■■ メイン関数を終了します．")
