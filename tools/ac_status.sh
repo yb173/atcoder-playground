@@ -11,7 +11,7 @@
 # ==================== 定数定義 ====================
 
 ### 最新のコンテスト番号
-LATEST_CONTEST=202
+LATEST_CONTEST=204
 
 ### 大問名の配列
 PARTS=()
@@ -22,23 +22,32 @@ PARTS[3]=d
 PARTS[4]=e
 PARTS[5]=f
 
-### 大問ごとの AC数
-ac_count=()
-ac_count[0]=0 # A の AC数
-ac_count[1]=0 # B の AC数
-ac_count[2]=0 # C の AC数
-ac_count[3]=0 # D の AC数
-ac_count[4]=0 # E の AC数
-ac_count[5]=0 # F の AC数
+### 大問ごとの Python のAC数
+ac_py_count=()
+ac_py_count[0]=0 # A の AC数
+ac_py_count[1]=0 # B の AC数
+ac_py_count[2]=0 # C の AC数
+ac_py_count[3]=0 # D の AC数
+ac_py_count[4]=0 # E の AC数
+ac_py_count[5]=0 # F の AC数
+
+### 大問ごとの C++ のAC数
+ac_cpp_count=()
+ac_cpp_count[0]=0 # A の AC数
+ac_cpp_count[1]=0 # B の AC数
+ac_cpp_count[2]=0 # C の AC数
+ac_cpp_count[3]=0 # D の AC数
+ac_cpp_count[4]=0 # E の AC数
+ac_cpp_count[5]=0 # F の AC数
 
 ### 大問の問題数
-# sum=()
-# sum[0]=0 # A の 問題数
-# sum[1]=0 # B の 問題数
-# sum[2]=0 # C の 問題数
-# sum[3]=0 # D の 問題数
-# sum[4]=0 # E の 問題数
-# sum[5]=0 # F の 問題数
+sum=()
+sum[0]=0 # A の 問題数
+sum[1]=0 # B の 問題数
+sum[2]=0 # C の 問題数
+sum[3]=0 # D の 問題数
+sum[4]=0 # E の 問題数
+sum[5]=0 # F の 問題数
 
 ### AC 状況を可視化する markdown ファイル
 AC_STATUS_FILE="./ac_status.md"
@@ -60,25 +69,46 @@ for i in `seq -w ${LATEST_CONTEST} 1` ; do
     RECORD="| ABC_${i} |"
     # 大問のループ
     for j in {0..5}; do
-        # python ファイル名
+        # 大問ディレクトリ
+        DIR=${TARGET_DIR}${PARTS[j]}/
+        # Python, C++ ファイル名
         PY_FILE=${TARGET_DIR}${PARTS[j]}/abc${i}_${PARTS[j]}.py
-        
-        if [ ! -e ${PY_FILE} ]; then
-            # ファイルが存在しなかった場合
-            RECORD="${RECORD} ー |"
-        elif [ ! -s ${PY_FILE} ]; then
-            # ファイルサイズがゼロの場合
-            RECORD="${RECORD} × |"
+        CPP_FILE=${TARGET_DIR}${PARTS[j]}/abc${i}_${PARTS[j]}.cpp
+    
+        # 大問ディレクトリが存在する場合
+        if [ -d ${DIR} ]; then
             # 問題数合計をインクリメント
-            # sum[j]=$((++sum[j]))
-        else
-            # ファイルサイズがゼロでない場合（ACしているとみなす）
-            RECORD="${RECORD} ● |"
-            # 問題数合計をインクリメント
-            # sum[j]=$((++sum[j]))
-            # AC数合計をインクリメント
-            ac_count[j]=$((++ac_count[j]))
+            sum[j]=$((++sum[j]))
         fi
+
+        if [ ! -e ${PY_FILE} ]; then
+            # Python ファイルが存在しなかった場合
+            RECORD="${RECORD} ー"
+        elif [ ! -s ${PY_FILE} ]; then
+            # Python ファイルのサイズがゼロ場合
+            RECORD="${RECORD} ×"
+        elif [ -s ${PY_FILE} ]; then
+            # Python ファイルのサイズがゼロよりおおきい場合（ACとみなす）
+            RECORD="${RECORD} ●"
+            # AC数合計をインクリメント
+            ac_py_count[j]=$((++ac_py_count[j]))
+        fi
+
+        if [ ! -e ${CPP_FILE} ]; then
+            # C++ ファイルが存在しなかった場合
+            RECORD="${RECORD} ー"
+        elif [ ! -s ${CPP_FILE} ]; then
+            # C++ ファイルのサイズがゼロ場合
+            RECORD="${RECORD} ×"
+        elif [ -s ${CPP_FILE} ]; then
+            # C++ ファイルのサイズがゼロよりおおきい場合（ACとみなす）
+            RECORD="${RECORD} ★"
+            # AC数合計をインクリメント
+            ac_cpp_count[j]=$((++ac_cpp_count[j]))
+        fi
+        
+        RECORD="${RECORD} |"
+
     done
     TABLE=${TABLE}${RECORD}$'\n'
 done
@@ -91,27 +121,23 @@ done
 echo "# AtCoder AC 状況" >> ${AC_STATUS_FILE}
 
 # AC サマリを書き込み
-# echo "## AC 状況サマリ" >> ${AC_STATUS_FILE}
-# echo "| Question | AC 数/問題数 | AC 率 |" >> ${AC_STATUS_FILE}
-# echo "| :----: | ----: | ----: |" >> ${AC_STATUS_FILE}
-# for i in {0..5}; do
-#     # AC 率
-#     ratio=`echo "scale=5; ${ac_count[i]} / ${sum[i]} * 100" | bc`
-#     ratio=`printf "%.2f" ${ratio}`
-#     # 例）A: 3/201 (0.015 %)
-#     echo "acカウント ${ac_count[i]}"
-#     echo "sum ${sum[i]}"
-#     echo "| ${PARTS[i]} | ${ac_count[i]}/${sum[i]} | ${ratio} % |" >> ${AC_STATUS_FILE}
-# done
 echo "## AC 状況サマリ" >> ${AC_STATUS_FILE}
-echo "| Question | AC 数 |" >> ${AC_STATUS_FILE}
-echo "| :----: | ----: |" >> ${AC_STATUS_FILE}
+echo "| Question | AC 数(py)/問題数 | AC 率(py) | AC 数(C++)/問題数 | AC 率(C++) |" >> ${AC_STATUS_FILE}
+echo "| :----: | ----: | ----: | ----: | ----: |" >> ${AC_STATUS_FILE}
 for i in {0..5}; do
-    echo "| ${PARTS[i]} | ${ac_count[i]} |" >> ${AC_STATUS_FILE}
+    # AC 率
+    ratio_py=`echo "scale=5; ${ac_py_count[i]} / ${sum[i]} * 100" | bc`
+    ratio_py=`printf "%.2f" ${ratio_py}`
+    ratio_cpp=`echo "scale=5; ${ac_cpp_count[i]} / ${sum[i]} * 100" | bc`
+    ratio_cpp=`printf "%.2f" ${ratio_cpp}`
+    # 例）A: 3/201 (0.015 %)
+    echo "| ${PARTS[i]} | ${ac_py_count[i]}/${sum[i]} | ${ratio_py} % | ${ac_cpp_count[i]}/${sum[i]} | ${ratio_cpp} % " >> ${AC_STATUS_FILE}
 done
+
 
 # markdown テーブルを書き込み
 echo "## AC 状況" >> ${AC_STATUS_FILE}
+echo "### ●：Python AC, ★：C++ AC, ×：ファイルサイズゼロ, ー：ファイルなし" >> ${AC_STATUS_FILE}
 echo "| Contest | A | B | C | D | E | F |" >> ${AC_STATUS_FILE}
 echo "| :----: | :----: | :----: | :----: | :----: | :----: | :----: |" >> ${AC_STATUS_FILE}
 echo "${TABLE}" >> ${AC_STATUS_FILE}
