@@ -1,0 +1,75 @@
+{
+  "contest": {
+    "id": "abc153",
+    "title": "AtCoder Beginner Contest 153",
+    "url": "https://atcoder.jp/contests/abc153"
+  },
+  "tasks": [
+    {
+      "id": "abc153_a",
+      "label": "A",
+      "title": "Serval vs Monster",
+      "url": "https://atcoder.jp/contests/abc153/tasks/abc153_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc153_a",
+        "submit": "abc153_a.py"
+      }
+    },
+    {
+      "id": "abc153_b",
+      "label": "B",
+      "title": "Common Raccoon vs Monster",
+      "url": "https://atcoder.jp/contests/abc153/tasks/abc153_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc153_b",
+        "submit": "abc153_b.py"
+      }
+    },
+    {
+      "id": "abc153_c",
+      "label": "C",
+      "title": "Fennec vs Monster",
+      "url": "https://atcoder.jp/contests/abc153/tasks/abc153_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc153_c",
+        "submit": "abc153_c.py"
+      }
+    },
+    {
+      "id": "abc153_d",
+      "label": "D",
+      "title": "Caracal vs Monster",
+      "url": "https://atcoder.jp/contests/abc153/tasks/abc153_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc153_d",
+        "submit": "abc153_d.py"
+      }
+    },
+    {
+      "id": "abc153_e",
+      "label": "E",
+      "title": "Crested Ibis vs Monster",
+      "url": "https://atcoder.jp/contests/abc153/tasks/abc153_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_abc153_e",
+        "submit": "abc153_e.py"
+      }
+    },
+    {
+      "id": "abc153_f",
+      "label": "F",
+      "title": "Silver Fox vs Monster",
+      "url": "https://atcoder.jp/contests/abc153/tasks/abc153_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_abc153_f",
+        "submit": "abc153_f.py"
+      }
+    }
+  ]
+}

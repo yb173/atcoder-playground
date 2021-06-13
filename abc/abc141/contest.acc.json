@@ -1,0 +1,75 @@
+{
+  "contest": {
+    "id": "abc141",
+    "title": "AtCoder Beginner Contest 141",
+    "url": "https://atcoder.jp/contests/abc141"
+  },
+  "tasks": [
+    {
+      "id": "abc141_a",
+      "label": "A",
+      "title": "Weather Prediction ",
+      "url": "https://atcoder.jp/contests/abc141/tasks/abc141_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc141_a",
+        "submit": "abc141_a.py"
+      }
+    },
+    {
+      "id": "abc141_b",
+      "label": "B",
+      "title": "Tap Dance",
+      "url": "https://atcoder.jp/contests/abc141/tasks/abc141_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc141_b",
+        "submit": "abc141_b.py"
+      }
+    },
+    {
+      "id": "abc141_c",
+      "label": "C",
+      "title": "Attack Survival",
+      "url": "https://atcoder.jp/contests/abc141/tasks/abc141_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc141_c",
+        "submit": "abc141_c.py"
+      }
+    },
+    {
+      "id": "abc141_d",
+      "label": "D",
+      "title": "Powerful Discount Tickets",
+      "url": "https://atcoder.jp/contests/abc141/tasks/abc141_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc141_d",
+        "submit": "abc141_d.py"
+      }
+    },
+    {
+      "id": "abc141_e",
+      "label": "E",
+      "title": "Who Says a Pun?",
+      "url": "https://atcoder.jp/contests/abc141/tasks/abc141_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_abc141_e",
+        "submit": "abc141_e.py"
+      }
+    },
+    {
+      "id": "abc141_f",
+      "label": "F",
+      "title": "Xor Sum 3",
+      "url": "https://atcoder.jp/contests/abc141/tasks/abc141_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_abc141_f",
+        "submit": "abc141_f.py"
+      }
+    }
+  ]
+}
