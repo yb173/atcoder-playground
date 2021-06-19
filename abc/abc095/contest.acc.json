@@ -1,0 +1,53 @@
+{
+  "contest": {
+    "id": "abc095",
+    "title": "AtCoder Beginner Contest 095",
+    "url": "https://atcoder.jp/contests/abc095"
+  },
+  "tasks": [
+    {
+      "id": "abc095_a",
+      "label": "A",
+      "title": "Something on It",
+      "url": "https://atcoder.jp/contests/abc095/tasks/abc095_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc095_a",
+        "submit": "abc095_a.py"
+      }
+    },
+    {
+      "id": "abc095_b",
+      "label": "B",
+      "title": "Bitter Alchemy",
+      "url": "https://atcoder.jp/contests/abc095/tasks/abc095_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc095_b",
+        "submit": "abc095_b.py"
+      }
+    },
+    {
+      "id": "arc096_a",
+      "label": "C",
+      "title": "Half and Half",
+      "url": "https://atcoder.jp/contests/abc095/tasks/arc096_a",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_arc096_a",
+        "submit": "arc096_a.py"
+      }
+    },
+    {
+      "id": "arc096_b",
+      "label": "D",
+      "title": "Static Sushi",
+      "url": "https://atcoder.jp/contests/abc095/tasks/arc096_b",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_arc096_b",
+        "submit": "arc096_b.py"
+      }
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+s = input()
+t = input()
+sorted_s_list = sorted(s)
+sorted_s = ''.join(sorted_s_list)
+sorted_t_list = sorted(t, reverse=True)
+sorted_t = ''.join(sorted_t_list)
+print("Yes" if sorted_s < sorted_t else "No")
