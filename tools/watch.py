@@ -159,8 +159,10 @@ class MyHandler(PatternMatchingEventHandler):
             else:
                 print(Decorate.BOLD + Color.RED + "[ WA ]" + Decorate.END)
 
-            print("Expected: " + out)
-            print("Actual  : " + result)
+            print(Decorate.BOLD + "Expected: " + Decorate.END)
+            print(out)
+            print(Decorate.BOLD + "Actual: " + Decorate.END)
+            print(result)
             print("")
 
         except subprocess.CalledProcessError as e:
@@ -199,8 +201,10 @@ class MyHandler(PatternMatchingEventHandler):
             else:
                 print(Decorate.BOLD + Color.RED + "[ WA ]" + Decorate.END)
 
-            print("Expected: " + out)
-            print("Actual  : " + result)
+            print(Decorate.BOLD + "Expected: " + Decorate.END)
+            print(out)
+            print(Decorate.BOLD + "Actual: " + Decorate.END)
+            print(result)
             print("")
 
         except subprocess.CalledProcessError as e:

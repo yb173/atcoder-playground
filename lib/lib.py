@@ -1,3 +1,17 @@
+import sys
+def debug_var(var):
+    """デバッガ
+
+    変数名とその値を標準エラー出力に出力します．
+
+    Args:
+        var (int, str, obj): 数値，文字列，配列
+    """
+    for k,v in globals().items():
+        if id(v) == id(var):
+            name = k
+    print(name + ' = ' + str(var), file=sys.stderr)
+
 def digitSum(N: int):
     """各桁の和を求める関数
 
@@ -35,3 +49,14 @@ def compute_divisors(num: int):
             divisors.add(i)
             divisors.add(num // i)
     return divisors
+
+
+
+### a - z の set
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+alp = set(alphabet)
+alp = list(alphabet)
+### A - Z の set
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALP = set(ALPHABET)
+ALP = list(ALPHABET)
