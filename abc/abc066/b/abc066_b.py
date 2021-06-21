@@ -1,15 +1,6 @@
 import inspect
 import re
 import sys
-import math
-
-from collections import defaultdict
-from collections import deque
-
-sys.setrecursionlimit(10 ** 9)
-
-INF = 1 << 60
-MOD = 10**9 + 7
 
 def debug(var):
     cf = inspect.currentframe()
@@ -22,16 +13,13 @@ def debug(var):
     print(arg_name + ' = ' + str(var), file=sys.stderr)
 
 S = input()
-d = defaultdict(lambda: 0)
-for v in S:
-    d[v] += 1
-debug(d)
+debug(S)
+debug(len(S))
 
-if d['o'] > 4:
-    print(0)
-    exit()
-
-if d['o'] == 4:
-    print(1)
-    exit()
-
+while len(S) > 1:
+    S = S[:-2]
+    debug(S)
+    l = len(S)
+    if S[:l // 2] == S[l // 2:]:
+        print(l)
+        exit()

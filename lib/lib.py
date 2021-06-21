@@ -12,6 +12,26 @@ def debug_var(var):
             name = k
     print(name + ' = ' + str(var), file=sys.stderr)
 
+
+
+import inspect
+import re
+import sys
+def debug(var):
+    cf = inspect.currentframe()
+    cfc = cf.f_code
+    bf = cf.f_back
+    bfi = inspect.getframeinfo(bf)
+    code_context_0 = bfi.code_context[0]
+
+    # 引数の名前を取得
+    matched = re.match(r'.*{0}\((.+)\)[^)]*'.format(cfc.co_name), code_context_0)
+    arg_name = matched.group(1) # 例) A, S, len(S)...
+
+    print(arg_name + ' = ' + str(var), file=sys.stderr)
+
+
+
 def digitSum(N: int):
     """各桁の和を求める関数
 
@@ -30,6 +50,8 @@ def digitSum(N: int):
         sum += mod
         N = q
     return sum
+
+
 
 def compute_divisors(num: int):
     """約数を求める関数
@@ -56,6 +78,7 @@ def compute_divisors(num: int):
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 alp = set(alphabet)
 alp = list(alphabet)
+
 ### A - Z の set
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 ALP = set(ALPHABET)
