@@ -1,0 +1,53 @@
+{
+  "contest": {
+    "id": "abc022",
+    "title": "AtCoder Beginner Contest 022",
+    "url": "https://atcoder.jp/contests/abc022"
+  },
+  "tasks": [
+    {
+      "id": "abc022_a",
+      "label": "A",
+      "title": "Best Body",
+      "url": "https://atcoder.jp/contests/abc022/tasks/abc022_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc022_a",
+        "submit": "abc022_a.py"
+      }
+    },
+    {
+      "id": "abc022_b",
+      "label": "B",
+      "title": "Bumble Bee",
+      "url": "https://atcoder.jp/contests/abc022/tasks/abc022_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc022_b",
+        "submit": "abc022_b.py"
+      }
+    },
+    {
+      "id": "abc022_c",
+      "label": "C",
+      "title": "Blue Bird",
+      "url": "https://atcoder.jp/contests/abc022/tasks/abc022_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc022_c",
+        "submit": "abc022_c.py"
+      }
+    },
+    {
+      "id": "abc022_d",
+      "label": "D",
+      "title": "Big Bang",
+      "url": "https://atcoder.jp/contests/abc022/tasks/abc022_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc022_d",
+        "submit": "abc022_d.py"
+      }
+    }
+  ]
+}
