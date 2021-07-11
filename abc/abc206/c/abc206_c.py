@@ -1,25 +1,18 @@
 from collections import defaultdict
 
-def wa(N):
-    ans = 0
-    for i in range(1, N):
-        ans += i
-    return ans
+def f(x: int) -> int:
+    return x * (x - 1) // 2
 
 N = int(input())
 A = list(map(int, input().split()))
-
-a = 0
-for i in range(1, N):
-    a += i
 
 d = defaultdict(lambda: 0)
 for i in range(N):
     d[A[i]] += 1
 
-tmp = 0
-for v in d.values():
-    if v > 1:
-        tmp += wa(v)
+ans = f(N)
+for v in d:
+    if d[v] > 1:
+        ans -= f(d[v])
 
-print(a - tmp)
+print(ans)

@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 watchdog = "*"
+numba = "*"
 
 [dev-packages]
 
