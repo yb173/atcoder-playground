@@ -1,0 +1,75 @@
+{
+  "contest": {
+    "id": "abc210",
+    "title": "AtCoder Beginner Contest 210",
+    "url": "https://atcoder.jp/contests/abc210"
+  },
+  "tasks": [
+    {
+      "id": "abc210_a",
+      "label": "A",
+      "title": "Cabbages",
+      "url": "https://atcoder.jp/contests/abc210/tasks/abc210_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc210_a",
+        "submit": "abc210_a.py"
+      }
+    },
+    {
+      "id": "abc210_b",
+      "label": "B",
+      "title": "Bouzu Mekuri",
+      "url": "https://atcoder.jp/contests/abc210/tasks/abc210_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc210_b",
+        "submit": "abc210_b.py"
+      }
+    },
+    {
+      "id": "abc210_c",
+      "label": "C",
+      "title": "Colorful Candies",
+      "url": "https://atcoder.jp/contests/abc210/tasks/abc210_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc210_c",
+        "submit": "abc210_c.py"
+      }
+    },
+    {
+      "id": "abc210_d",
+      "label": "D",
+      "title": "National Railway",
+      "url": "https://atcoder.jp/contests/abc210/tasks/abc210_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc210_d",
+        "submit": "abc210_d.py"
+      }
+    },
+    {
+      "id": "abc210_e",
+      "label": "E",
+      "title": "Ring MST",
+      "url": "https://atcoder.jp/contests/abc210/tasks/abc210_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_abc210_e",
+        "submit": "abc210_e.py"
+      }
+    },
+    {
+      "id": "abc210_f",
+      "label": "F",
+      "title": "Coprime Solitaire",
+      "url": "https://atcoder.jp/contests/abc210/tasks/abc210_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_abc210_f",
+        "submit": "abc210_f.py"
+      }
+    }
+  ]
+}
