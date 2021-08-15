@@ -23,7 +23,8 @@ from watchdog.events import FileModifiedEvent, DirModifiedEvent
 from watchdog.observers import Observer
 
 ### 監視＆実行されるファイルのパターン
-PATTERNS = ['abc*.py', 'abc*.cpp']
+# PATTERNS = ['abc*.py', 'abc*.cpp']
+PATTERNS = ['*.py', '*.cpp']
 
 ### テストケースのインプットファイルのパターン
 TEST_INPUT_PERTTERN = 'tests_*/*.in'

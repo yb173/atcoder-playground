@@ -138,3 +138,18 @@ def lcm(a: int, b: int):
         int: a と b の最小公倍数
     """
     return a * b // gcd(a, b)
+
+
+def compress(X):
+    """座標を圧縮する関数
+    
+    Args:
+        X (list of int): 座標の配列
+    Returns:
+        list of int: 圧縮された座標
+    """
+    d = {}
+    Y = sorted(list(set(X)))
+    for i in range(len(Y)):
+        d[Y[i]] = i + 1
+    return [d[X[i]] for i in range(len(X))]
