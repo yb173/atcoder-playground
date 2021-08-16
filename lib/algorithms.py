@@ -124,6 +124,53 @@ def next_prime_number(now: int):
             return now
         now += 2
 
+from itertools import chain
+def fast_prime_set(n: int):
+    """ n までの素数のセットを求める関数
+    
+    引数で与えられた n までの素数のセットを返却します．
+
+    Args:
+        n (int): 最大値
+
+    Returns:
+        Set[int]: 素数のセット
+    """
+    if n < 4:
+        return ({}, {}, {2}, {2, 3})[n]
+    n_sqrt = int(n ** 0.5) + 1
+    primes = {2, 3} | set(chain(range(5, n + 1, 6), range(7, n + 1, 6)))
+    for i in range(5, n_sqrt, 2):
+        if i in primes:
+            primes.difference_update(range(i * i, n, i * 2))
+    return primes
+
+from collections import defaultdict
+def prime_factorization(x: int):
+    """ x の素因数分解をおこなう関数
+    
+    引数で与えられた値の素因数分解をおこないます．
+
+    Args:
+        x (int): 素因数分解の対象
+
+    Returns:
+        DefaultDict[int, int]: 素因数がキー，冪乗数が値の辞書
+    """
+    primes = fast_prime_set(1000)
+
+    fact = defaultdict(int)
+    for prime in primes:
+        while x % prime == 0:
+            fact[prime] += 1
+            x //= prime
+        if x == 1:
+            break
+        if x in primes:
+            fact[x] += 1
+            break
+    return fact
+
 from math import gcd
 def lcm(a: int, b: int):
     """最小公倍数求める関数
