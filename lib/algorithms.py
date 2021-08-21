@@ -195,8 +195,8 @@ def compress(X):
     Returns:
         list of int: 圧縮された座標
     """
-    d = {}
     Y = sorted(list(set(X)))
+    d = {}
     for i in range(len(Y)):
-        d[Y[i]] = i + 1
+        d[Y[i]] = i + 1 # i の場合もあり
     return [d[X[i]] for i in range(len(X))]
