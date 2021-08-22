@@ -1,0 +1,75 @@
+{
+  "contest": {
+    "id": "typical-algorithm",
+    "title": "典型アルゴリズム問題集",
+    "url": "https://atcoder.jp/contests/typical-algorithm"
+  },
+  "tasks": [
+    {
+      "id": "typical_algorithm_a",
+      "label": "A",
+      "title": "二分探索の練習問題",
+      "url": "https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_typical_algorithm_a",
+        "submit": "typical_algorithm_a.py"
+      }
+    },
+    {
+      "id": "typical_algorithm_b",
+      "label": "B",
+      "title": "区間スケジューリング問題",
+      "url": "https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_typical_algorithm_b",
+        "submit": "typical_algorithm_b.py"
+      }
+    },
+    {
+      "id": "typical_algorithm_c",
+      "label": "C",
+      "title": "巡回セールスマン問題",
+      "url": "https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_typical_algorithm_c",
+        "submit": "typical_algorithm_c.py"
+      }
+    },
+    {
+      "id": "typical_algorithm_d",
+      "label": "D",
+      "title": "単一始点最短経路問題",
+      "url": "https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_typical_algorithm_d",
+        "submit": "typical_algorithm_d.py"
+      }
+    },
+    {
+      "id": "typical_algorithm_e",
+      "label": "E",
+      "title": "全点対最短経路問題",
+      "url": "https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_typical_algorithm_e",
+        "submit": "typical_algorithm_e.py"
+      }
+    },
+    {
+      "id": "typical_algorithm_f",
+      "label": "F",
+      "title": "最小全域木問題",
+      "url": "https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_typical_algorithm_f",
+        "submit": "typical_algorithm_f.py"
+      }
+    }
+  ]
+}
