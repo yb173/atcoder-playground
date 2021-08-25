@@ -2,6 +2,30 @@ from collections import deque
 
 MOD = 10 ** 9 + 7
 
+def bfs_count(G):
+    """ 幅優先探索（最短経路の数）
+    """
+    n = len(G)
+    cost = [0 if i == 0 else -1 for i in range(n)]
+    count = [1 if i == 0 else 0 for i in range(n)]
+
+    q = deque()
+    q.append(0)
+
+    while q:
+        v = q.popleft()
+        for vv in G[v]:
+            if cost[vv] == -1:
+                cost[vv] = cost[v] + 1
+                q.append(vv)
+                count[vv] = count[v]
+            else:
+                if cost[vv] == cost[v] + 1:
+                    count[vv] += count[v]
+                    count[vv] %= MOD
+
+    return count
+
 N, M = map(int, input().split())
 G = [[] for i in range(N)]
 for i in range(M):
@@ -11,28 +35,6 @@ for i in range(M):
     G[a].append(b)
     G[b].append(a)
 
-# 都市１(i = 0) から都市 i までの最短経路
-dist = [None] * N
-# 都市１から都市１までの最短経路は
-dist[0] = 0
-# 都市１(i = 0) から都市 i までの最短経路の数
-cnt = [0] * N
-# 都市１から都市１までの最短経路は距離ゼロの１通り
-cnt[0] = 1
+count = bfs_count(G)
 
-q = deque([0])
-# q.append(0)
-
-# BFS
-while q:
-    v = q.popleft()
-    for vv in G[v]:
-        if dist[vv] is None:
-            dist[vv] = dist[v] + 1
-            q.append(vv)
-            cnt[vv] = cnt[v]
-        elif dist[vv] == dist[v] + 1:
-            cnt[vv] += cnt[v]
-            cnt[vv] %= MOD
-
-print(cnt[N - 1])
+print(count[N - 1])

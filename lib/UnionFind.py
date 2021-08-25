@@ -20,7 +20,7 @@ class UnionFind:
 
         return self.find(y) == self.find(y)
 
-    def union(self, x: int, y: int) -> int:
+    def unite(self, x: int, y: int) -> int:
         assert 0 <= x < self.n
         assert 0 <= y < self.n
         
