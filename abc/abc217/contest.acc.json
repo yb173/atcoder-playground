@@ -1,0 +1,97 @@
+{
+  "contest": {
+    "id": "abc217",
+    "title": "AtCoder Beginner Contest 217",
+    "url": "https://atcoder.jp/contests/abc217"
+  },
+  "tasks": [
+    {
+      "id": "abc217_a",
+      "label": "A",
+      "title": "Lexicographic Order",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_a",
+      "directory": {
+        "path": "a",
+        "testdir": "tests_abc217_a",
+        "submit": "abc217_a.py"
+      }
+    },
+    {
+      "id": "abc217_b",
+      "label": "B",
+      "title": "AtCoder Quiz",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_b",
+      "directory": {
+        "path": "b",
+        "testdir": "tests_abc217_b",
+        "submit": "abc217_b.py"
+      }
+    },
+    {
+      "id": "abc217_c",
+      "label": "C",
+      "title": "Inverse of Permutation",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_c",
+      "directory": {
+        "path": "c",
+        "testdir": "tests_abc217_c",
+        "submit": "abc217_c.py"
+      }
+    },
+    {
+      "id": "abc217_d",
+      "label": "D",
+      "title": "Cutting Woods",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests_abc217_d",
+        "submit": "abc217_d.py"
+      }
+    },
+    {
+      "id": "abc217_e",
+      "label": "E",
+      "title": "Sorting Queries",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests_abc217_e",
+        "submit": "abc217_e.py"
+      }
+    },
+    {
+      "id": "abc217_f",
+      "label": "F",
+      "title": "Make Pair",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests_abc217_f",
+        "submit": "abc217_f.py"
+      }
+    },
+    {
+      "id": "abc217_g",
+      "label": "G",
+      "title": "Groups",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_g",
+      "directory": {
+        "path": "g",
+        "testdir": "tests_abc217_g",
+        "submit": "abc217_g.py"
+      }
+    },
+    {
+      "id": "abc217_h",
+      "label": "H",
+      "title": "Snuketoon",
+      "url": "https://atcoder.jp/contests/abc217/tasks/abc217_h",
+      "directory": {
+        "path": "h",
+        "testdir": "tests_abc217_h",
+        "submit": "abc217_h.py"
+      }
+    }
+  ]
+}
