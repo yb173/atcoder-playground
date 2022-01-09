@@ -1,3 +1,23 @@
 {
-    "python.defaultInterpreterPath": ".venv/bin/python"
+  "python.venvPath": ".venv",
+  "python.pythonPath": ".venv/bin/python",
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "python.languageServer": "Default",
+  "python.analysis.extraPaths": [],
+  "C_Cpp.clang_format_fallbackStyle": "Google",
+  "C_Cpp.errorSquiggles": "EnabledIfIncludesResolve",
+  "C_Cpp.loggingLevel": "Warning",
+  "C_Cpp.updateChannel": "Insiders",
+  "clang.executable": "clang++",
+  "clang.cxxflags": ["-std=c++14"],
+  "code-runner.runInTerminal": true,
+  "code-runner.executorMap": {
+    "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+  },
+  "[c++]": {
+    "editor.tabSize": 4
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  }
 }
